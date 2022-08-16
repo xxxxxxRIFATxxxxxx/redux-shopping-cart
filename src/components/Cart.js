@@ -1,7 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import CartProduct from './CartProduct';
 
 const Cart = () => {
+    const CardProducts = useSelector((state) => state.cart.cart);
+    const totalItem = useSelector((state) => state.cart.totalItem);
+    const totalPrice = useSelector((state) => state.cart.totalPrice);
+
     return (
         <div
             className="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-4 xxl:col-span-4"
@@ -10,7 +15,7 @@ const Cart = () => {
                 className="bg-white py-4 px-4 shadow-md rounded-lg my-4 mx-4"
             >
                 {/* Cart Product */}
-                <CartProduct />
+                {CardProducts.map(product => <CartProduct key={product.id} product={product} />)}
 
                 {/* Total Item */}
                 <div
@@ -18,7 +23,7 @@ const Cart = () => {
                 >
                     <div className="text-xl font-semibold">
                         <p>Total Item</p>
-                        <p className="text-5xl">0</p>
+                        <p className="text-5xl">{totalItem}</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +37,7 @@ const Cart = () => {
                 >
                     <div className="text-xl font-semibold">
                         <p>Total Price</p>
-                        <p className="text-5xl">0</p>
+                        <p className="text-5xl">{totalPrice}</p>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,29 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addProductToCart, removeProductToCart } from '../redux/cart/actions.js';
 
-const CartProduct = () => {
+const CartProduct = ({product}) => {
+    const {name, quantity} = product;
+    const dispatch = useDispatch();
+
+    const addProductHandler = (product) => {
+      dispatch(addProductToCart(product));
+      totalItemHandler();
+    };
+
+    const removeProductHandler = (product) => {
+      dispatch(removeProductToCart(product));
+      totalItemHandler();
+    };
+
+    const totalItemHandler = ()=> {
+      dispatch(totalItemHandler());
+    };
+
     return (
     <div className="flex justify-between border-b-2 mb-2">
         <div className="text-lg py-2">
-           <p>Asus Vivobook X515MA</p>
+           <p>{name}</p>
         </div>
 
         <div className="text-lg py-2">
@@ -13,6 +32,7 @@ const CartProduct = () => {
               >
               <button
                  className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center"
+                 onClick={() => removeProductHandler(product)}
                  >
                  <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -30,10 +50,11 @@ const CartProduct = () => {
                  </svg>
               </button>
 
-              <p>0</p>
+              <p>{quantity}</p>
               
               <button
                  className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center"
+                 onClick={() => addProductHandler(product)}
                  >
                  <svg
                     xmlns="http://www.w3.org/2000/svg"
