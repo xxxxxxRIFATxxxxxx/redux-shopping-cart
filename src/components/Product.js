@@ -1,10 +1,22 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addProductToCart } from '../redux/cart/actions';
+import {
+    addProductToCart,
+    decreaseQuantity,
+    totalItem,
+    totalPrice
+} from '../redux/product/actions';
 
 const Product = ({product}) => {
     const dispatch = useDispatch();
     const {name, price, quantity} = product;
+
+    const addProductHandler = (product) => {
+        dispatch(addProductToCart(product));
+        dispatch(decreaseQuantity(product));
+        dispatch(totalItem());
+        dispatch(totalPrice());
+    };
     
     return (
         <div
@@ -19,7 +31,7 @@ const Product = ({product}) => {
                 <div className="text-lg font-semibold">
                     <button
                         className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 px-2 rounded-full inline-flex items-center"
-                        onClick={() => dispatch(addProductToCart(product))}
+                        onClick={() => addProductHandler(product)}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

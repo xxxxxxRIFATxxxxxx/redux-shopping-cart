@@ -1,6 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addProductToCart, removeProductToCart } from '../redux/cart/actions.js';
+import {
+   addProductToCart,
+   decreaseQuantity,
+   increaseQuantity,
+   removeProductToCart,
+   totalItem,
+   totalPrice
+} from '../redux/product/actions.js';
 
 const CartProduct = ({product}) => {
     const {name, quantity} = product;
@@ -8,16 +15,16 @@ const CartProduct = ({product}) => {
 
     const addProductHandler = (product) => {
       dispatch(addProductToCart(product));
-      totalItemHandler();
+      dispatch(decreaseQuantity(product));
+      dispatch(totalItem());
+      dispatch(totalPrice());
     };
 
     const removeProductHandler = (product) => {
       dispatch(removeProductToCart(product));
-      totalItemHandler();
-    };
-
-    const totalItemHandler = ()=> {
-      dispatch(totalItemHandler());
+      dispatch(increaseQuantity(product));
+      dispatch(totalItem());
+      dispatch(totalPrice());
     };
 
     return (
