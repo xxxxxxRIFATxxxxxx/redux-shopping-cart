@@ -1,6 +1,5 @@
 import {
     ADD_PRODUCT_TO_CART,
-    CHECK_QUANTITY,
     DECREASE_QUANTITY,
     INCREASE_QUANTITY,
     REMOVE_PRODUCT_TO_CART,
@@ -60,14 +59,6 @@ const productReducer = (state = initialState, action) => {
             }, 0);
     
             newState.totalPrice = totalPrice;
-            return newState;
-
-        case CHECK_QUANTITY:
-            newState.productList.forEach(product => {
-                if (product.id === action.payload.id) {
-                    product.quantity += 1;
-                };
-            });
             return newState;
 
         case INCREASE_QUANTITY:

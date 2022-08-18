@@ -1,6 +1,5 @@
 import {
     ADD_PRODUCT_TO_CART,
-    CHECK_QUANTITY,
     DECREASE_QUANTITY,
     INCREASE_QUANTITY,
     REMOVE_PRODUCT_TO_CART,
@@ -18,13 +17,6 @@ export const addProductToCart = (product) => {
 export const removeProductToCart = (product) => {
     return {
         type: REMOVE_PRODUCT_TO_CART,
-        payload: product
-    };
-};
-
-export const checkQuantity = (product) => {
-    return {
-        type: CHECK_QUANTITY,
         payload: product
     };
 };
