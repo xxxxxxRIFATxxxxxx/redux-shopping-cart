@@ -32,7 +32,12 @@ const initialState = {
     ],
     cart: [],
     totalItem: 0,
-    totalPrice: 0
+    totalPrice: 0,
+    stock: {
+        "6569335955175": "20",
+        "9203545526678": "35",
+        "5827333451744": "72",
+    }
 };
 
 const productReducer = (state = initialState, action) => {
@@ -72,14 +77,18 @@ const productReducer = (state = initialState, action) => {
         case DECREASE_QUANTITY:
             newState.productList.forEach(product => {
                 if (product.id === action.payload.id) {
-                    product.quantity -= 1;
+                    if (product.quantity >= 1 ) {
+                        product.quantity -= 1;
+                    };
                 };
             });
             return newState;
         
         case ADD_PRODUCT_TO_CART:
             if (itemIndex !== -1) {
-                newState.cart[itemIndex].quantity += 1;
+                if (newState.cart[itemIndex].quantity < newState.stock[newState.cart[itemIndex].id]) {
+                    newState.cart[itemIndex].quantity += 1;
+                };
             }
 
             else {
